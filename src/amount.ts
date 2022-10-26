@@ -7,7 +7,7 @@ export class TokenAmount {
     const intNum = Math.trunc(uiAmount);
     const floatNum = uiAmount - intNum;
     const unitAmount = 10 ** token.decimals;
-    return new BN(intNum).muln(unitAmount).addn(Math.trunc(floatNum * unitAmount));
+    return new BN(intNum).mul(new BN(unitAmount)).add(new BN(Math.trunc(floatNum * unitAmount)));
   }
 
   static toUiAmountSync({ amount, token }: { amount: BN; token: Token }): number {
