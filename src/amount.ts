@@ -3,7 +3,7 @@ import { Token } from "./token";
 
 export class TokenAmount {
   static toU64AmountSync({ amount, token }: { amount: number | string; token: Token }): BN {
-    const [intString, decimalString] = Number(amount).toString().split(".");
+    const [intString, decimalString] = (Number(amount) || 0).toString().split(".");
     const unitAmount = 10 ** token.decimals;
     const floatString = "0." + (decimalString || "0");
     return new BN(intString).mul(new BN(unitAmount)).add(new BN(Math.trunc(Number(floatString) * unitAmount)));
