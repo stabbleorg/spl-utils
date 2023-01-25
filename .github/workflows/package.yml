@@ -32,8 +32,4 @@ jobs:
           cmd: build
 
       - name: Publish SDK
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: publish
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: export NPM_AUTH_TOKEN=${{ secrets.NPM_TOKEN }} && npm publish
