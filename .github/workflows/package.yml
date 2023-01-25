@@ -16,10 +16,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set Node.js 18.x
+      - name: Set Node.js 16.x
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
+          node-version: 16.x
 
       - name: Install NPM Packages
         uses: borales/actions-yarn@v4
@@ -32,4 +32,6 @@ jobs:
           cmd: build
 
       - name: Publish SDK
-        run: export NPM_AUTH_TOKEN=${{ secrets.NPM_TOKEN }} && npm publish
+        run: |
+          echo '//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}' > .npmrc
+          npm publish --access public
