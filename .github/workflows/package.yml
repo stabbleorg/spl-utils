@@ -1,0 +1,39 @@
+name: Publish NPM Package
+
+on:
+  push:
+    paths:
+      - "src/**"
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install NPM Packages
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Build TypeScript
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
+
+      - name: Publish SDK
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: publish:sdk
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
