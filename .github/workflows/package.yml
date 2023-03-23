@@ -2,8 +2,6 @@ name: Publish NPM Package
 
 on:
   push:
-    paths:
-      - "src/**"
     branches:
       - main
   workflow_dispatch:
@@ -24,7 +22,7 @@ jobs:
       - name: Install NPM Packages
         uses: borales/actions-yarn@v4
         with:
-          cmd: install
+          cmd: install --pure-lockfile
 
       - name: Build TypeScript
         uses: borales/actions-yarn@v4
