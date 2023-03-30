@@ -14,15 +14,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set Node.js 16.x
+      - name: Setup Node.js 18.x
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.x
 
       - name: Install NPM Packages
         uses: borales/actions-yarn@v4
         with:
-          cmd: install --pure-lockfile
+          cmd: install --frozen-lockfile
 
       - name: Build TypeScript
         uses: borales/actions-yarn@v4
